@@ -6,6 +6,8 @@ Current release: `v1.1.10-mc26.1.2`
 
 This fork is prepared for players, pack makers, and server users who only want to download the mod and play.
 
+Portuguese version: [README.pt_BR.md](README.pt_BR.md)
+
 ## What this is
 
 Mob Grinding Utils adds utility blocks and items for mob farms, XP handling, chicken-feed progression, tanks, conveyors, fans, and related automation.
@@ -49,4 +51,3 @@ If you are not used to GitHub, use the release asset directly. You do not need t
 
 This fork is based on the original Mob Grinding Utils project by vadis365:
 <https://github.com/vadis365/Mob-Grinding-Utils>
-

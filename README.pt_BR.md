@@ -1,10 +1,12 @@
-﻿# Mob Grinding Utils
+# Mob Grinding Utils
 
 Mob Grinding Utils atualizado para **NeoForge 26.1.2**.
 
 Versão atual: `v1.1.10-mc26.1.2`
 
 Este fork foi preparado para jogadores, pack makers e donos de servidor que só querem baixar o mod e jogar.
+
+English version: [README.md](README.md)
 
 ## O que é
 
