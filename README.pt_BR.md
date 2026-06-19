@@ -1,4 +1,4 @@
-# Mob Grinding Utils
+﻿# Mob Grinding Utils
 
 Mob Grinding Utils atualizado para **NeoForge 26.1.2**.
 
@@ -49,4 +49,3 @@ Se você não está acostumado com GitHub, use o arquivo da release diretamente.
 
 Este fork é baseado no projeto original Mob Grinding Utils, de vadis365:
 <https://github.com/vadis365/Mob-Grinding-Utils>
-
