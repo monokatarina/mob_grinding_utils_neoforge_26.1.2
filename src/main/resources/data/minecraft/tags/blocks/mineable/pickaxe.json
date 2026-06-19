@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "mob_grinding_utils:fan",
+    "mob_grinding_utils:saw",
+    "mob_grinding_utils:entity_spawner"
+  ]
+}

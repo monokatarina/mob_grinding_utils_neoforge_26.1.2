@@ -1,0 +1,72 @@
+package mob_grinding_utils;
+
+import java.util.Objects;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+import javax.annotation.Nonnull;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
+
+
+public class MGUBlockReg<B extends Block,I extends Item, T extends BlockEntity> implements Supplier<B> {
+    private final String name;
+    private final DeferredBlock<B> block;
+    private final DeferredItem<I> item;
+    private DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> tile;
+
+    @Override
+    public B get() {
+        return block.get();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public MGUBlockReg(String name, Function<BlockBehaviour.Properties, B> blockFactory, BiFunction<B, Item.Properties, I> itemFactory, BlockEntityType.BlockEntitySupplier<T> tileSupplier) {
+        this.name = name;
+        block = ModBlocks.BLOCKS.registerBlock(name, blockFactory);
+        item = ModItems.ITEMS.registerItem(name, props -> itemFactory.apply(block.get(), props));
+        tile = ModBlocks.TILE_ENTITIES.register(
+                name,
+                () -> new BlockEntityType<>(
+                        tileSupplier,
+                        block.get()
+                )
+        );
+    }
+
+    public MGUBlockReg(String name, Function<BlockBehaviour.Properties, B> blockFactory, BiFunction<B, Item.Properties, I> itemFactory) {
+        this.name = name;
+        block = ModBlocks.BLOCKS.registerBlock(name, blockFactory);
+        item = ModItems.ITEMS.registerItem(name, props -> itemFactory.apply(block.get(), props));
+    }
+
+    @Nonnull
+    public B getBlock() {
+        return block.get();
+    }
+
+    @Nonnull
+    public I getItem() {
+        return item.get();
+    }
+
+    @Nonnull
+    public BlockEntityType<T> getTileEntityType() {
+        //just in case...
+        return Objects.requireNonNull(tile).get();
+    }
+
+
+}
+

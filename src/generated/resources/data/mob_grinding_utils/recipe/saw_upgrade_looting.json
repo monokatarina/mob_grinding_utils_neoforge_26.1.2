@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": "minecraft:gold_nugget",
+    "L": "minecraft:blue_dye",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "GLG",
+    "LRL",
+    "GLG"
+  ],
+  "result": {
+    "id": "mob_grinding_utils:saw_upgrade_looting"
+  }
+}

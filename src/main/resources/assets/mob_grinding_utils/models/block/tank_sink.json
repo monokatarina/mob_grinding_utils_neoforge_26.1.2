@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "render_type": "cutout",
+    "textures": {
+        "particle": "mob_grinding_utils:block/tank_sink_north",
+        "down": "mob_grinding_utils:block/tank_sink_down",
+        "up": "mob_grinding_utils:block/tank_sink_up",
+        "north": "mob_grinding_utils:block/tank_sink_north",
+        "east": "mob_grinding_utils:block/tank_sink_east",
+        "south": "mob_grinding_utils:block/tank_sink_south",
+        "west": "mob_grinding_utils:block/tank_sink_west"
+    }
+}

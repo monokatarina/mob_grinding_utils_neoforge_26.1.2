@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": "minecraft:diamond",
+    "I": "minecraft:iron_block",
+    "R": "minecraft:redstone_block",
+    "S": "minecraft:iron_sword",
+    "V": "mob_grinding_utils:spikes"
+  },
+  "pattern": [
+    "SDS",
+    "VRV",
+    "DID"
+  ],
+  "result": {
+    "id": "mob_grinding_utils:saw"
+  }
+}

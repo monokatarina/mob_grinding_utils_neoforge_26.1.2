@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "O": "minecraft:obsidian"
+  },
+  "pattern": [
+    "O ",
+    "II",
+    "I "
+  ],
+  "result": {
+    "id": "mob_grinding_utils:xp_tap"
+  }
+}

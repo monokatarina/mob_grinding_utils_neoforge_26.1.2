@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "render_type": "solid",
+    "textures": {
+        "all": "mob_grinding_utils:block/dragon_muffler"
+    }
+}

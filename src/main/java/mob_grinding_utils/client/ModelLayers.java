@@ -1,0 +1,68 @@
+package mob_grinding_utils.client;
+
+import mob_grinding_utils.ModBlocks;
+import mob_grinding_utils.Reference;
+import mob_grinding_utils.client.render.TileEntityAbsorptionRenderer;
+import mob_grinding_utils.client.render.TileEntityFanRenderer;
+import mob_grinding_utils.client.render.TileEntityMGUSpawnerRenderer;
+import mob_grinding_utils.client.render.TileEntitySawRenderer;
+import mob_grinding_utils.client.render.TileEntityTankRenderer;
+import mob_grinding_utils.client.render.TileEntityXPSolidifierRenderer;
+import mob_grinding_utils.client.render.SawSpecialItemRenderer;
+import mob_grinding_utils.models.ModelAHConnect;
+import mob_grinding_utils.models.ModelSawBase;
+import mob_grinding_utils.models.ModelSawBlade;
+import mob_grinding_utils.models.ModelTankBlock;
+import mob_grinding_utils.models.ModelXPSolidifier;
+import mob_grinding_utils.util.RL;
+import net.minecraft.client.renderer.block.FluidModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.resources.Identifier;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterFluidModelsEvent;
+
+public class ModelLayers {
+    public static final ModelLayerLocation SAW_BASE = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Reference.MOD_ID, "saw_base"), "saw_base");
+    public static final ModelLayerLocation SAW_BLADE = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Reference.MOD_ID, "saw_blade"), "saw_blade");
+    public static final ModelLayerLocation ABSORPTION_HOPPER = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Reference.MOD_ID, "absorption_hopper"), "absorption_hopper");
+    public static final ModelLayerLocation TANK = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Reference.MOD_ID, "tank"), "tank");
+    public static final ModelLayerLocation XPSOLIDIFIER = new ModelLayerLocation(Identifier.fromNamespaceAndPath(Reference.MOD_ID, "xp_solidifier"), "xp_solidifier");
+
+    public static void init(IEventBus bus) {
+        bus.addListener(ModelLayers::registerEntityRenderers);
+        bus.addListener(ModelLayers::registerLayerDefinitions);
+        bus.addListener(ModelLayers::registerFluidModels);
+        bus.addListener(SawSpecialItemRenderer::registerSpecialRenderers);
+    }
+
+    public static void registerFluidModels(RegisterFluidModelsEvent event) {
+        FluidModel.Unbaked fluidXp = new FluidModel.Unbaked(
+                new Material(RL.mgu("block/fluid_xp")),
+                new Material(RL.mgu("block/fluid_xp")),
+                null,
+                null
+        );
+        event.register(fluidXp, ModBlocks.FLUID_XP.get(), ModBlocks.FLUID_XP_FLOWING.get());
+    }
+
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlocks.FAN.getTileEntityType(), TileEntityFanRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.SAW.getTileEntityType(), TileEntitySawRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.ABSORPTION_HOPPER.getTileEntityType(), TileEntityAbsorptionRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.TANK.getTileEntityType(), TileEntityTankRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.TANK_SINK.getTileEntityType(), TileEntityTankRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.JUMBO_TANK.getTileEntityType(), TileEntityTankRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.XPSOLIDIFIER.getTileEntityType(), TileEntityXPSolidifierRenderer::new);
+        event.registerBlockEntityRenderer(ModBlocks.ENTITY_SPAWNER.getTileEntityType(), TileEntityMGUSpawnerRenderer::new);
+    }
+    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(SAW_BASE, ModelSawBase::createBodyLayer);
+        event.registerLayerDefinition(SAW_BLADE, ModelSawBlade::createBodyLayer);
+        event.registerLayerDefinition(ABSORPTION_HOPPER, ModelAHConnect::createBodyLayer);
+        event.registerLayerDefinition(TANK, ModelTankBlock::createBodyLayer);
+        event.registerLayerDefinition(XPSOLIDIFIER, ModelXPSolidifier::createBodyLayer);
+    }
+}
+

@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "mob_grinding_utils:item/fan_upgrade_height"
+    }
+}

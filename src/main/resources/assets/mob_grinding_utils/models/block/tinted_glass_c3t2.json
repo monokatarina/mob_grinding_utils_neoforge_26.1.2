@@ -1,0 +1,13 @@
+{
+	"parent": "block/cube",
+	"render_type": "translucent",
+    "textures": {
+		"particle": "mob_grinding_utils:block/tinted_glass_island",
+        "down": "mob_grinding_utils:block/tinted_glass_ew",
+		"up": "mob_grinding_utils:block/tinted_glass_news",
+		"north": "mob_grinding_utils:block/tinted_glass_new",
+		"south": "mob_grinding_utils:block/tinted_glass_new",
+		"west": "mob_grinding_utils:block/tinted_glass_news",
+		"east": "mob_grinding_utils:block/tinted_glass_news"
+    }
+}

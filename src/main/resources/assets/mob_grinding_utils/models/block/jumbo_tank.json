@@ -1,0 +1,13 @@
+{
+    "render_type": "cutout",
+    "parent": "block/cube",
+    "textures": {
+        "particle": "mob_grinding_utils:block/tank_jumbo_north",
+        "down": "mob_grinding_utils:block/tank_jumbo_down",
+        "up": "mob_grinding_utils:block/tank_jumbo_up",
+        "north": "mob_grinding_utils:block/tank_jumbo_north",
+        "east": "mob_grinding_utils:block/tank_jumbo_east",
+        "south": "mob_grinding_utils:block/tank_jumbo_south",
+        "west": "mob_grinding_utils:block/tank_jumbo_west"
+    }
+}

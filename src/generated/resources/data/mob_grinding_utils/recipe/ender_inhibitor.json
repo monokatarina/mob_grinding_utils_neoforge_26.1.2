@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": "minecraft:ender_eye",
+    "G": "minecraft:glowstone_dust",
+    "I": "minecraft:iron_ingot",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    " R ",
+    "IEI",
+    " G "
+  ],
+  "result": {
+    "id": "mob_grinding_utils:ender_inhibitor_on"
+  }
+}

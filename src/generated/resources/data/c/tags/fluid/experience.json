@@ -1,0 +1,13 @@
+{
+  "values": [
+    "mob_grinding_utils:fluid_xp",
+    {
+      "id": "#pneumaticcraft:memory_essence",
+      "required": false
+    },
+    {
+      "id": "#cofh_core:experience",
+      "required": false
+    }
+  ]
+}

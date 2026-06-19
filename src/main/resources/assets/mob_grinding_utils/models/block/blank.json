@@ -1,0 +1,6 @@
+{
+    "parent": "builtin/entity",
+        "textures": {
+        "particle": "mob_grinding_utils:block/saw_break_particles"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "facing=down,powered=false": { "model": "mob_grinding_utils:block/saw", "x": 270 },
+        "facing=up,powered=false": { "model": "mob_grinding_utils:block/saw", "x": 90 },
+        "facing=north,powered=false": { "model": "mob_grinding_utils:block/saw", "y": 180 },
+        "facing=south,powered=false": { "model": "mob_grinding_utils:block/saw" },
+        "facing=west,powered=false":  { "model": "mob_grinding_utils:block/saw", "y": 90 },
+        "facing=east,powered=false":  { "model": "mob_grinding_utils:block/saw", "y": 270 },
+        "facing=down,powered=true": { "model": "mob_grinding_utils:block/saw", "x": 270 },
+        "facing=up,powered=true": { "model": "mob_grinding_utils:block/saw", "x": 90 },
+        "facing=north,powered=true": { "model": "mob_grinding_utils:block/saw", "y": 180 },
+        "facing=south,powered=true": { "model": "mob_grinding_utils:block/saw" },
+        "facing=west,powered=true":  { "model": "mob_grinding_utils:block/saw", "y": 90 },
+        "facing=east,powered=true":  { "model": "mob_grinding_utils:block/saw", "y": 270 }
+    }
+}

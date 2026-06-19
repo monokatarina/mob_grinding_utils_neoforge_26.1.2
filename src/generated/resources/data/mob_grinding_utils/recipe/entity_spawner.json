@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": "minecraft:ender_eye",
+    "I": "minecraft:iron_block",
+    "P": "minecraft:piston",
+    "R": "minecraft:redstone_block",
+    "X": "mob_grinding_utils:solid_xp_block"
+  },
+  "pattern": [
+    "EEE",
+    "XRX",
+    "IPI"
+  ],
+  "result": {
+    "id": "mob_grinding_utils:entity_spawner"
+  }
+}

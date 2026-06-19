@@ -1,0 +1,93 @@
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'maven-publish'
+    id 'eclipse'
+    id 'net.neoforged.gradle.userdev' version '7.1.36'
+    id "me.modmuss50.mod-publish-plugin" version "0.4.5"
+}
+
+repositories {
+    maven { url = 'https://maven.creeperhost.net/' }
+    maven { url "https://www.cursemaven.com" }
+}
+
+version = "${mod_version}+mc${minecraft_version}"
+group = 'com.vadis365.mob_grinding_utils'
+base {
+    archivesName = "mob_grinding_utils"
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
+
+runs {
+    configureEach {
+        jvmArgument '-Xmx8G'
+
+        modSource project.sourceSets.main
+    }
+
+    client {
+        systemProperty 'neoforge.enabledGameTestNamespaces', "mob_grinding_utils"
+        arguments.addAll('--width', '1280', '--height', '720')
+    }
+
+    server {
+        systemProperty 'neoforge.enabledGameTestNamespaces', "mob_grinding_utils"
+        arguments.add '--nogui'
+    }
+
+    gameTestServer {
+        systemProperty 'forge.enabledGameTestNamespaces', "mob_grinding_utils"
+    }
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neo_version}"
+    compileOnly "mezz.jei:jei-${jei_mc_version}-common-api:${jei_version}"//new
+    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
+    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
+
+
+
+    //runtimeOnly "curse.maven:PP-657831:6304429"
+    //runtimeOnly "curse.maven:top-245211:5084077"
+    //runtimeOnly fg.deobf("curse.maven:playermobs-430513:3153298") //Not ported yet
+    //runtimeOnly fg.deobf("curse.maven:IF-266515:3261176")
+    //runtimeOnly fg.deobf("curse.maven:TITANIUM-287342:3223141")
+    //runtimeOnly fg.deobf("curse.maven:XNET-260912:3140153")
+    //runtimeOnly fg.deobf("curse.maven:RFTBASE-326041:3206945")
+    //runtimeOnly fg.deobf("curse.maven:MCJTYLIB-233105:3236516")
+    //runtimeOnly fg.deobf("curse.maven:COFHCORE-69162:3249453")
+    //runtimeOnly fg.deobf("curse.maven:TE-69163:3247000")
+    //runtimeOnly fg.deobf("curse.maven:TF-222880:3248150")
+    //runtimeOnly fg.deobf("curse.maven:CLUMPS-256717:3481298")
+    //runtimeOnly fg.deobf("curse.maven:CYCLIC-239286:3708026")
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "mob_grinding_utils",
+            "Specification-Vendor": "vadis365",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
