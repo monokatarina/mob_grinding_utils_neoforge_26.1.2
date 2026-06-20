@@ -47,6 +47,11 @@ public abstract class TileEntityInventoryHelper extends BlockEntity implements W
 
 	@Override
     public void setItem(int index, @Nullable ItemStack stack) {
+		if (stack == null || stack.isEmpty()) {
+			inventory.set(index, ItemStack.EMPTY);
+			this.setChanged();
+			return;
+		}
         inventory.set(index, stack);
         if (stack.getCount() > this.getMaxStackSize())
             stack.setCount(this.getMaxStackSize());
@@ -92,22 +97,26 @@ public abstract class TileEntityInventoryHelper extends BlockEntity implements W
 	protected void loadAdditional(net.minecraft.world.level.storage.ValueInput input) {
 		super.loadAdditional(input);
 		NonNullList<ItemStack> restored = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
-		int index = 0;
-		for (ItemStack stack : input.listOrEmpty("items", ItemStack.CODEC)) {
-			if (index >= restored.size()) {
-				break;
+		ContainerHelper.loadAllItems(input, restored);
+
+		if (restored.stream().allMatch(ItemStack::isEmpty)) {
+			int index = 0;
+			for (ItemStack stack : input.listOrEmpty("items", ItemStack.CODEC)) {
+				if (index >= restored.size()) {
+					break;
+				}
+				if (!stack.isEmpty()) {
+					restored.set(index, stack);
+				}
+				index++;
 			}
-			restored.set(index++, stack);
 		}
 		inventory = restored;
 	}
 
 	protected void saveAdditional(net.minecraft.world.level.storage.ValueOutput output) {
 		super.saveAdditional(output);
-		var list = output.list("items", ItemStack.CODEC);
-		for (ItemStack stack : inventory) {
-			list.add(stack);
-		}
+		ContainerHelper.saveAllItems(output, inventory, false);
 	}
 }
 

@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -509,14 +510,8 @@ public class TileEntityMGUSpawner extends BlockEntity implements MenuProvider, B
 		output.putInt("offsetX", offsetX);
 		output.putInt("offsetY", offsetY);
 		output.putInt("offsetZ", offsetZ);
-		var inputList = output.list("inputSlots", ItemStack.CODEC);
-		for (int i = 0; i < inputSlots.size(); i++) {
-			inputList.add(inputSlots.getResource(i).toStack((int) inputSlots.getAmountAsLong(i)));
-		}
-		var fuelList = output.list("fuelSlot", ItemStack.CODEC);
-		for (int i = 0; i < fuelSlot.size(); i++) {
-			fuelList.add(fuelSlot.getResource(i).toStack((int) fuelSlot.getAmountAsLong(i)));
-		}
+		saveItemHandler(output, "InputSlots", inputSlots);
+		saveItemHandler(output, "FuelSlot", fuelSlot);
 	}
 
 	@Override
@@ -529,20 +524,46 @@ public class TileEntityMGUSpawner extends BlockEntity implements MenuProvider, B
 		offsetY = input.getIntOr("offsetY", 0);
 		offsetZ = input.getIntOr("offsetZ", 0);
 
-		int index = 0;
-		for (ItemStack stack : input.listOrEmpty("inputSlots", ItemStack.CODEC)) {
-			if (index >= inputSlots.size()) {
-				break;
+		loadItemHandler(input, "InputSlots", "inputSlots", inputSlots);
+		loadItemHandler(input, "FuelSlot", "fuelSlot", fuelSlot);
+	}
+
+	private static void saveItemHandler(ValueOutput output, String key, ItemStacksResourceHandler handler) {
+		var list = output.list(key, ItemStackWithSlot.CODEC);
+		for (int slot = 0; slot < handler.size(); slot++) {
+			ItemStack stack = handler.getResource(slot).toStack((int) handler.getAmountAsLong(slot));
+			if (!stack.isEmpty()) {
+				list.add(new ItemStackWithSlot(slot, stack));
 			}
-			inputSlots.set(index++, stack.isEmpty() ? ItemResource.EMPTY : ItemResource.of(stack), stack.getCount());
 		}
 
-		index = 0;
-		for (ItemStack stack : input.listOrEmpty("fuelSlot", ItemStack.CODEC)) {
-			if (index >= fuelSlot.size()) {
+		if (list.isEmpty()) {
+			output.discard(key);
+		}
+	}
+
+	private static void loadItemHandler(ValueInput input, String key, String legacyKey, ItemStacksResourceHandler handler) {
+		boolean loaded = false;
+		for (ItemStackWithSlot item : input.listOrEmpty(key, ItemStackWithSlot.CODEC)) {
+			if (item.isValidInContainer(handler.size()) && !item.stack().isEmpty()) {
+				handler.set(item.slot(), ItemResource.of(item.stack()), item.stack().getCount());
+				loaded = true;
+			}
+		}
+
+		if (loaded) {
+			return;
+		}
+
+		int index = 0;
+		for (ItemStack stack : input.listOrEmpty(legacyKey, ItemStack.CODEC)) {
+			if (index >= handler.size()) {
 				break;
 			}
-			fuelSlot.set(index++, stack.isEmpty() ? ItemResource.EMPTY : ItemResource.of(stack), stack.getCount());
+			if (!stack.isEmpty()) {
+				handler.set(index, ItemResource.of(stack), stack.getCount());
+			}
+			index++;
 		}
 	}
 }
