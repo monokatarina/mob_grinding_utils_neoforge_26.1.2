@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -69,8 +70,19 @@ public class BlockDirtSpawner extends Block {
 
     protected static void prepareDirtSpawnedMob(Mob entity, RandomSource random) {
         limitDirtSlimeSize(entity, random);
-        entity.setNoAi(true);
+        makeDirtMobPassive(entity);
         entity.addTag(DIRT_SPAWNED_TAG);
+    }
+
+    protected static void makeDirtMobPassive(Mob entity) {
+        if (entity.getAttribute(Attributes.MOVEMENT_SPEED) != null) {
+            entity.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.0D);
+        }
+        if (entity.getAttribute(Attributes.FOLLOW_RANGE) != null) {
+            entity.getAttribute(Attributes.FOLLOW_RANGE).setBaseValue(0.0D);
+        }
+        entity.setTarget(null);
+        entity.setAggressive(false);
     }
 }
 
