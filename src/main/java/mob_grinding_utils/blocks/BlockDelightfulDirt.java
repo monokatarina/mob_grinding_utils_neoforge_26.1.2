@@ -77,9 +77,10 @@ public class BlockDelightfulDirt extends BlockDirtSpawner {
 		}
 
 		if (!shouldSnowCap(level, pos) && shouldSpawnMob(level, pos)) {
-			AABB areaToCheck = new AABB(pos).inflate(5, 2, 5);
+			discardExpiredDirtMobs(level, pos, MobCategory.CREATURE);
+			AABB areaToCheck = localSpawnArea(pos);
 			int entityCount = level.getEntitiesOfClass(Mob.class, areaToCheck, entity -> entity.getType().getCategory() == MobCategory.CREATURE).size();
-			if (entityCount < 8)
+			if (entityCount < LOCAL_MOB_LIMIT && canSpawnMoreDirtMobs(level, pos, MobCategory.CREATURE))
 				spawnMob(level, pos);
 		}
 
@@ -120,6 +121,7 @@ public class BlockDelightfulDirt extends BlockDirtSpawner {
 			if (result == TriState.FALSE)
 				return;
 			EventHooks.finalizeMobSpawn(entity, level, level.getCurrentDifficultyAt(pos), EntitySpawnReason.NATURAL, null);
+			prepareDirtSpawnedMob(entity, level.getRandom());
 			level.addFreshEntity(entity);
 		}
 	}

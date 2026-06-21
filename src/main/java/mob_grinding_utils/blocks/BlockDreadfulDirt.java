@@ -78,9 +78,10 @@ public class BlockDreadfulDirt extends BlockDirtSpawner {
 		}
 
 		if (!shouldCatchFire(level, pos) && shouldSpawnMob(level, pos)) {
-			AABB areaToCheck = new AABB(pos).inflate(5, 2, 5);
+			discardExpiredDirtMobs(level, pos, MobCategory.MONSTER);
+			AABB areaToCheck = localSpawnArea(pos);
 			int entityCount = level.getEntitiesOfClass(Mob.class, areaToCheck, entity -> entity instanceof Enemy).size();
-			if (entityCount < 8)
+			if (entityCount < LOCAL_MOB_LIMIT && canSpawnMoreDirtMobs(level, pos, MobCategory.MONSTER))
 				spawnMob(level, pos);
 		}
 
@@ -112,6 +113,7 @@ public class BlockDreadfulDirt extends BlockDirtSpawner {
 		Mob entity = (Mob) type.create(level, EntitySpawnReason.NATURAL);
 		if (entity == null)
 			return;
+		limitDirtSlimeSize(entity, level.getRandom());
 		entity.setPos(pos.getX() + 0.5D, pos.getY() + 1D, pos.getZ() + 0.5D);
 		if (!checkSpawnPosition(entity, level, EntitySpawnReason.NATURAL))
 			return;
@@ -120,6 +122,7 @@ public class BlockDreadfulDirt extends BlockDirtSpawner {
 			if (result == TriState.FALSE)
 				return;
 			EventHooks.finalizeMobSpawn(entity, level, level.getCurrentDifficultyAt(pos), EntitySpawnReason.NATURAL, null);
+			prepareDirtSpawnedMob(entity, level.getRandom());
 			level.addFreshEntity(entity);
 		}
 	}

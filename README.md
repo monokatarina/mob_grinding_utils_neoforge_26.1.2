@@ -44,6 +44,8 @@ Se voce nao esta acostumado com GitHub, nao baixe o codigo-fonte. Baixe somente 
 - GUI e renderizacao atualizadas para NeoForge 26.1.2
 - Recipes e tags ajustadas para melhor compatibilidade com modpacks
 - Delightful Dirt ajustado para usar o mesmo ritmo de geracao do Dreadful Dirt, mantendo a diferenca: Dreadful gera monstros e Delightful gera criaturas passivas
+- Ajustes anti-lag para Dreadful Dirt e Delightful Dirt: mobs gerados pela dirt nascem sem IA, somem mais rapido e respeitam limite de 50 mobs na area
+- Slimes gerados pela Dreadful Dirt agora so podem nascer pequenos ou medios, nunca grandes
 - Documentacao em portugues e ingles
 - `.jar` pronto para download direto na Release
 
@@ -104,6 +106,8 @@ If you are not used to GitHub, do not download the source code. Download only th
 - Updated GUI and rendering for NeoForge 26.1.2
 - Recipes and tags adjusted for better modpack compatibility
 - Delightful Dirt now uses the same spawn timing as Dreadful Dirt, while keeping the intended difference: Dreadful spawns monsters and Delightful spawns passive creatures
+- Anti-lag changes for Dreadful Dirt and Delightful Dirt: dirt-spawned mobs now spawn without AI, despawn faster, and respect a 50-mob area limit
+- Slimes spawned by Dreadful Dirt can now only be small or medium, never large
 - Portuguese and English documentation
 - Release-ready `.jar` for direct download
 
