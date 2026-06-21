@@ -82,6 +82,10 @@ public class BlockDelightfulDirt extends BlockDirtSpawner {
 			if (entityCount < 8)
 				spawnMob(level, pos);
 		}
+
+		if (shouldSnowCap(level, pos) || shouldSpawnMob(level, pos)) {
+			level.scheduleTick(pos, this, Mth.nextInt(rand, 5, 20));
+		}
 	}
 
 	@Override
@@ -147,10 +151,6 @@ public class BlockDelightfulDirt extends BlockDirtSpawner {
 				double d5 = (rand.nextFloat() - 0.5D) * 0.5D;
 				level.addParticle(net.minecraft.core.particles.ParticleTypes.PORTAL, d0 + d3, d1 + d4, d2 + d5, 0D, 0D, 0D);
 			}
-		}
-
-		if (shouldSnowCap(level, pos) || shouldSpawnMob(level, pos)) {
-			level.scheduleTick(pos, this, Mth.nextInt(rand, 5, 20));
 		}
 	}
 }

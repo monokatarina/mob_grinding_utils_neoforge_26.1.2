@@ -6,6 +6,11 @@ Versao atual: `v1.1.10-mc26.1.2`
 
 Este fork foi preparado para jogadores, pack makers e donos de servidor que so querem baixar o mod e jogar.
 
+**Download direto para jogadores:**  
+<https://github.com/monokatarina/mob_grinding_utils_neoforge_26.1.2/releases/latest/download/mob_grinding_utils-1.1.10%2Bmc26.1.2.jar>
+
+Se voce nao conhece GitHub: clique no link acima, baixe o arquivo `.jar` e coloque ele dentro da pasta `mods` do seu Minecraft.
+
 ## O que e
 
 Mob Grinding Utils adiciona blocos e itens para farms de mobs, processamento de XP, progressao com chicken feed, tanques, conveyors, fans e automacao relacionada.
@@ -14,11 +19,11 @@ Este fork atualiza o mod para NeoForge 26.1.2 e mantem as mudancas compativeis c
 
 ## Download
 
-1. Abra a pagina de **Releases** deste repositorio.
-2. Baixe o arquivo `.jar` anexado na release mais recente.
-3. Coloque esse `.jar` dentro da pasta `mods`.
+1. Clique aqui para baixar direto: <https://github.com/monokatarina/mob_grinding_utils_neoforge_26.1.2/releases/latest/download/mob_grinding_utils-1.1.10%2Bmc26.1.2.jar>
+2. Salve o arquivo `.jar`.
+3. Coloque esse `.jar` dentro da pasta `mods` do Minecraft.
 
-Se voce nao esta acostumado com GitHub, baixe apenas o arquivo `.jar` da release. Voce nao precisa baixar o codigo-fonte.
+Se voce nao esta acostumado com GitHub, nao baixe o codigo-fonte. Baixe somente o arquivo `.jar` pelo link direto acima.
 
 ## Requisitos
 
@@ -36,6 +41,7 @@ Se voce nao esta acostumado com GitHub, baixe apenas o arquivo `.jar` da release
 
 - GUI e renderizacao atualizadas para NeoForge 26.1.2
 - Recipes e tags ajustadas para melhor compatibilidade com modpacks
+- Delightful Dirt ajustado para usar o mesmo ritmo de geracao do Dreadful Dirt, mantendo a diferenca: Dreadful gera monstros e Delightful gera criaturas passivas
 - Documentacao em portugues e ingles
 - `.jar` pronto para download direto na Release
 
